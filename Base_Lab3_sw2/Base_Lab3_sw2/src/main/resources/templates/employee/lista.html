@@ -10,27 +10,35 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lista de Empleados</h1>
-        <a class="btn btn-primary mt-4 mb-4" th:href="@{}"></a>                 <!-- COMPLETAR -->
-        <form class="input-group mb-lg-3" method="post" th:action="@{}">                <!-- COMPLETAR -->
-            <!-- COMPLETAR -->
-            <div class="input-group-append">
-                <!-- COMPLETAR -->
-            </div>
+        <h2>Lista de Empleados</h2>
+        <a class="btn btn-primary mt-4 mb-4" style="margin-left: 20px" th:href="@{'new'}">Nuevo Empleado</a>
+
+        <form method="post" th:action="@{/employee/buscarPorNombre}">
+            <input name="searchField" class="form-control mb-3" type="text" placeholder="Search" />
         </form>
 
-        <!-- COMPLETAR -->
-        <!-- COMPLETAR -->
-            <table class="table table-sm" th:if="${}">
-                <thead>
-                <tr>
-                    <!-- COMPLETAR -->
-                </tr>
-                </thead>
-                <tbody>
-                <!-- COMPLETAR -->
-                </tbody>
-            </table>
-        </div>
-    </body>
+        <table class="table table-sm">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Puesto</th>
+                <th>Departamento</th>
+                <th>Ciudad</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="employee, info : ${listaEmpleados}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${employee.nombreempleado}"></td>
+                <td th:text="${employee.apellidoempleado}"></td>
+                <td th:text="${employee.department.nombredepartamento}"></td>
+                <td th:text="${employee.apellidoempleado}"></td>
+                <td><a class="btn btn-primary" th:href="@{'/employee/editar' + '?id=' + ${employee.idemployee}}">Editar</a></td>
+                <td><a class="btn btn-danger" th:href="@{'/employee/borrar' + '?id=' + ${employee.idemployee}}">Borrar</a></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
 </html>
